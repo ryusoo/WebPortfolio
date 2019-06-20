@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<title>MY SITE</title>
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css?family=Courgette');
+		@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+		* {
+			/* font-family: 'Nanum Gothic', sans-serif; */
+			font-family: sans-serif;
+			box-sizing: border-box;
+			user-select: none;
+			outline: none;
+		}
+		html { /* 부드러운 페이지 전환효과 */
+			scroll-behavior: smooth;
+		}
+		body, ul, h1 { 	
+			margin: 0; 
+			padding: 0;	
+		}
+		body { 	
+			background: #f5f6f7;
+		}
+		ul { list-style: none; }
+		h2 > b {
+			font-size: 1.3em;
+			text-align: center;
+			color: #333;/* #f1f1f1 */
+			font-family: 'Courgette', cursive;
+		}
+		a:link, a:visited {
+			text-decoration: none;
+			color: inherit; /* 상속받은 색 그대로 물려받겠다 */
+			/* box-sizing: border-box; 이거 주면 탑 보더가 사라진다 */
+			padding: 0 20px;
+		}
+		header {
+	 		width: 100%;
+		 	height: 79px;
+		 	display: block;
+			position: fixed;
+			top: 0;
+			z-index: 8;
+			background-color: white;
+		}
+		.shadow {
+			width: 100%;
+			box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),
+						0 4px 20px 0 rgba(0,0,0,0.19);
+			z-index: 9;
+		}
+
+
+
+
+
+		.name_logo_wrapper {
+			background: white; /* #000 */
+		}
+		
+		.name_logo {
+			float: left;
+			line-height: 79px;
+		}
+		.name_logo > span > a {
+			font-family: 'Playfair Display', serif;
+			font-weight: bold;
+			font-style: italic;
+			font-size: 1.8em;
+			color: #333;
+		}
+	/* 	.name_logo > span {
+		text-shadow: 2px 2px gold;
+	}
+	.name_logo > span > .txt:before {
+		content: 'Ryu Programmer';
+		color: gold;
+		border-radius: 3px;
+		padding: 2px 5px;
+		margin: 0px
+		filter: blur(5px);
+	}
+	 */
+
+
+
+		.header_menu {
+			float: right;
+		}
+		.header_menu li {
+			display: block;
+			float: left;
+			line-height: 79px;
+		}
+		.header_menu li a {
+			position: relative; /* 아직 위치는 똑같음 left right안줌 */
+			color: #313131;
+			display: block; /* 가로다 내꺼  원래 a 태그 inline임*/
+			overflow: hidden; /* 이 사이즈 지나면 다 없애겠다 길게해도 content 넘어가면 사라짐 */
+			text-transform: uppercase;/*  전부 대문자로 바꿔줌, lowercase는 전부 소문자로 바꿔줌 */
+			transition: 0.7s all;
+		}
+		.header_menu li a:before { 
+			/* 가상선택자는 태그로 안 만들고 선언만 함. 앞에다 만들 것이기 때문에 before 그리고 a 태그만 따라다닌다. */
+			content: '';
+			width: 200px; /* border의 길이를 정한것 */
+			position: absolute;
+			border-bottom: 5px solid #313131;
+			bottom: 0;
+			right: 350px;
+			transition: 0.7s all;
+
+		}
+		.header_menu li a:hover:before {
+			right: 0;
+			
+		}
+
+
+
+		.header_wrap {
+			border: 1px solid lavender;
+			height: 79px;
+			display: flex;
+			justify-content: space-around;
+		}
+
+
+
+
+		section {
+			margin-top: 100px;
+		}
+		.aboutme {
+			padding: 82px 0;
+			text-align: center;
+			color: #333;/* #f1f1f1 */
+		}
+	
+		.aboutme > img {
+			display: inline-block;
+			width: 25%;
+			height: 25%;
+			margin: 32px 0;
+			max-width: 30%;
+			border-radius: 25px;
+			box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),
+						0 4px 20px 0 rgba(0,0,0,0.19);
+		}
+		.job_wrap {
+			color: black;
+			width: 25%;
+			margin: auto;
+			padding: 7px 0;
+			border-radius: 25px;
+			box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),
+						0 4px 20px 0 rgba(0,0,0,0.19);
+			background-color: #f1f1f1;
+		}
+		.job_wrap > span {
+			font-size: 20px;
+		}
+
+		.type_web, .type_big {
+			color: #49c5b6;
+			font-weight: bold;
+		}
+
+
+
+
+
+		/* Profile */
+		.profile_wrap {
+			padding: 200px 0;
+			margin: 70px;
+		}
+		.profile {
+			width: 50%;
+			margin: auto;
+			text-align: center;
+		}
+		.icon {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%; /* 왼쪽, 오른쪽 50%, 50% -> 최대 50%임 동그래진다 */
+			background: #262626;
+			box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),
+						0 4px 20px 0 rgba(0,0,0,0.19); 
+			display: flex; /* 정중앙 정렬시킨다 */
+			justify-content: center;
+			align-items: center;
+			position: relative;
+		}
+		.icon:hover:before {
+			content: "";
+			position: absolute;
+			top: -2px;
+			left: -2px;
+			right: -2px;
+			bottom: -2px;
+			border-radius: 50%;
+			background: #fff;
+			z-index: -1;
+			animation: animate 5s linear infinite;
+		}
+		.icon:hover:after {
+			content: "";
+			position: absolute;
+			top: -2px;
+			left: -2px;
+			right: -2px;
+			bottom: -2px;
+			background: #fff;
+			z-index: -2;
+			filter: blur(40px);
+		}
+		.icon:hover:before, .icon:hover:after {
+			background: linear-gradient(235deg, #41D3BD, #dadada, #49c5b6); /* 배경에 위(녹색)->아래(파란색) 그라데이션 주고  각도를 틀어 줌 #49c5b6 #49c5b6*/
+
+		}
+		.icon i {
+			color: white;
+			font-size: 38px;
+			transition: .2s;
+		}
+		.icon:hover i { /* icon을 호버했을 때 i를 제어해라 */
+			transform: scale(1.3);
+		}
+		.icon_group {
+			width: 70%;
+			margin: 70px auto;
+			display: flex; /* inline에 row가 기본효과이다 가로로 붙는다 */
+			justify-content: space-evenly;
+
+		}
+		.icon:hover {
+			cursor: pointer;
+			background-image: linear-gradient(125deg, #42AB9E, #41D3BD, #2ca899);
+			
+
+			/* background: linear-gradient(#2ca899, #49c5b6, #2ca899); */
+			
+			/* box-shadow: 0 0 20px yellow,
+						 0 0 20px red,
+						 0 0 20px blue; */
+			
+		}
+		.icon:hover .word_wrap {
+			opacity: 1; /* display:none;-> display: block; 이것은 transition이 안먹음. 아예 존재하지 않기 때문이다 그래서 opacity:0;->opacity: 1; 이렇게 투명도 주는 것이랑 둘이 다르다. 호버했을 때 드롭다운처럼 계속 나와있게 하려면 제이쿼리를 써야한다.*/
+
+		}
+		
+		 @keyframes animate {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); } 
+		} 
+		.word_wrap {
+			background: #dadada;/* #f1f1f1 */
+			position: absolute;
+			padding: 15px 10px;
+			border-radius: 15px;
+			top: 90%;
+			z-index: -3; /*  숫자가 높을 수록 올라옴 */
+			opacity: 0;
+			transition: opacity .5s;
+			white-space: nowrap; /* 띄어쓰기와 -를 쓰면 한줄개행되는데 한줄로 쓰겠다는 뜻 */		
+			text-align: center;	
+		} 
+		
+
+
+
+
+
+
+		.shape {
+			background-color: #f1f1f1;
+			width: 15px;
+			height: 15px;
+			position: absolute;
+			top: -8px;
+			left: 50%;
+			transform: translateX(-50%) rotate(45deg);
+			z-index: 4;
+		}
+		.word_wrap > h1 {
+			text-align: center;
+		}
+
+		.word_wrap > h3 {
+			text-align: center;
+		}
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		.skills {
+			padding: 32px 0 0 0;
+			position: relative;
+		    height: 100vh;
+			background-color: rgba(0, 0, 0, 0.4);
+		}
+		.skills:after {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-image: url('img/bwbgi.png');
+			background-size: cover;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+
+		}
+		.img_cover {
+  			position: absolute;
+ 			height: 100%;
+ 			width: 100%;
+   			
+   			
+   			color: white;
+		}
+		
+		.skills > h2 {
+			text-align: center;
+			padding: 100px 0;
+			
+		}
+		#skills_color {
+			color: white;
+
+		}
+		.whitebar {
+			width: 35%;
+			background-color: white;
+			margin: auto;
+			box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),
+						0 4px 20px 0 rgba(0,0,0,0.19);
+		}
+		.slatebar {
+			background-color: #49c5b6;/* #49c5b6 #42AB9E */
+			height: 20px; /* 39px */
+			text-align: center;
+			line-height: 20px;
+			color: white;
+			font-size: 12px;
+
+		}
+		.skills > p {
+			display: block;
+			width: 40%;
+			margin: 16px auto;
+			padding-left: 25px;
+			color: white;/* #333 */
+		}
+
+
+
+
+		
+		.contact_wrap {
+			padding: 100px 0 45px 0;
+			height: 600px;
+			margin-bottom: 30px;
+		}
+		.contact_wrap > h2 {
+			text-align: center;
+		}
+		.contact > p {
+			color: black;/* #f1f1f1 */
+			padding: 0;
+			font-size: 18px;
+			margin-top: 0; 
+			letter-spacing: -1px;
+		}
+		.inner_contact {
+			width: 50%;
+			margin: auto;
+			display: flex;
+			padding: 30px 0 30px 50px;
+
+		}
+		.map { 
+			flex: 1;
+			max-height: 444px;
+		}
+		.contact { 
+			flex: 1.5;
+			padding: 0px 20px;
+
+		}
+		.coninfo > label {
+			font-size: 15px;
+			color: black;/* #f1f1f1 */
+		}
+		.coninfo_wrap1 > div > input {
+			border: 1px solid #ccc;
+			width: 344px;
+			padding: 8px;
+			height: 40px;
+			margin-top: 3px;
+			background-color: white;
+		}
+		.coninfo_email > input {
+			width: 80%;
+		}
+		.coninfo > textarea {
+			border: 1px solid #ccc;
+			width: 344px;
+			padding: 8px;
+			height: 145px;
+			margin-top: 3px;
+			overflow: auto;
+			background-color: white;
+		}
+
+		 
+		.coninfo > input {
+			border: 1px solid #ccc;
+			width: 100%;
+			padding: 8px;
+			height: 40px;
+			/* margin-top: 3px; */
+			overflow: auto;
+			background-color: lightgray;
+			margin: 3px auto;
+		} 
+
+
+		.contact > button {
+			width: 130px;
+			margin-left: 215px;
+			background-color: #49c5b6;
+			color: white;
+			border: 0;
+			padding: 8px;
+			height: 40px;
+			display: block;
+		}
+		.contact > button:hover {
+			
+			background-color: #42AB9E;
+			color: white;
+		
+		}
+
+		
+		/* .coninfo_wrap1 {
+			display: flex;
+		}
+		#coninfo_name {
+			flex: 1;
+			width: 100%;
+		}
+		#coninfo_email {
+			flex:1;
+			width: 100%;
+		}
+		 */
+
+
+
+
+
+
+
+
+		footer {
+			width: auto;
+			height: 100px;
+			/* border-top: 1px solid darkgray; */
+		}
+
+		
+		.btn {
+			background: none;
+			border: 2px solid #000;
+			font-family: "montserrat", sans-serif;
+			text-transform: uppercase;
+			padding: 12px 20px;
+			min-width: 200px; /* 최소 너비 */
+			margin: 10px;
+			cursor:pointer;
+			transition: color 0.4s linear; /* 색을 0.4초에 고르게분배해서 하겠다 */
+			position: relative;
+			line-height: 10px;
+		}
+		.btn:hover {
+			color: #fff;
+		}
+		.btn:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: #42AB9E;
+			z-index: -1;
+			transition: transform 0.5s;
+			transform-origin: bottom; /* 변환의 중심을 설정 top bottom / bottom / left / 0 0(0, 0) 영컴마영*/
+			transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7); /* (x1, y1, x2, y2) 시간 */
+		}
+		
+		.btn:before {
+			transform: scaleY(0);
+		}
+		.btn:hover:before {
+			transform: scaleY(1);
+		}
+
+
+
+
+
+		
+
+		.sfooter {
+			height: 100px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 50px;
+		}
+
+
+		/* .sns_wrap {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 100%;
+			text-align: center;
+		} */
+
+		.sns_btn {
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			padding: 0px!important;
+			background-color: white;
+			margin: 0 0 10px 10px;
+			border-radius: 30%;
+			box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2),
+						0 4px 20px 0 rgba(0,0,0,0.19);
+			color: #49c5b6!important;
+			overflow: hidden;
+			position: relative;
+			text-align: center;
+		}
+		.sns_btn i {
+			line-height: 40px;
+			font-size: 20px;
+			transition: 0.2s linear;
+		}
+		.sns_btn:hover i {
+			transform: scale(1.3);
+			color: #EEE;
+		}
+		.sns_btn:before {
+			content: "";
+			position: absolute;
+			width: 120%;
+			height: 120%;
+			background-color: #49c5b6;
+			transform: rotate(45deg);
+			left: -110%;
+			top: 90%;
+		}
+		.sns_btn:hover:before {
+			animation: sns_hover 0.7s 1;
+			top: -10%;
+			left: -10%;
+		}
+		@keyframes sns_hover {
+			0% { left: -100%; top: 90%; }
+			50% { left: 10%; top: -30%; }
+			100% { left: -10%; top: -10% }
+		}
+		.sns_followme > h2 {
+			letter-spacing: -1px;
+			text-transform: uppercase;
+		}
+
+
+
+		/* TOP 버튼 */
+		#topBtn {
+			position: fixed;
+			bottom: 40px;
+			right: 40px;
+			font-size: 22px;
+			width: 50px;
+			height: 50px;
+			background: dimgray;
+			color: white;
+			border: none;
+			cursor: pointer;
+			border-radius: 50%;
+			outline: none;
+			display: none;
+			z-index: 9;
+		}
+		#topBtn i {
+			transition: .3s;
+		}
+		#topBtn:hover {
+			background: #42AB9E;
+		}
+		#topBtn:hover i {
+			transform: scale(1.3);
+		}
+
+
+
+
+
+		
+
+	</style>
+
+	<!-- 지도 gmap.js로 잘라내기하고 불러오는 코드이다 -->
+	<script type="text/javascript" src="gmap.js"></script> 
+
+	<!-- 1. 지도를 사용하는 방법 script는 CSS끝나는 곳에 위치-->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxyNX18_UWfG0ll6ArJCY7-TERBwpkX6I
+&callback=initMap" type="text/javascript"></script>
+
+</head>
+<body onload="initialize()">
+
+	<!-- TOP 버튼 (최상위 스크롤로 올라감) -->
+	<button id="topBtn">
+		<i class="fas fa-arrow-up"></i>
+	</button>
+
+
+	<header>
+		<div class="shadow"></div>
+		<div class="header">
+			<div class="header_wrap">
+
+
+				<div class="name_logo_wrapper">
+					<div class="name_logo">
+						<span class="txt"><a href="#">Ryu Programmer</a></span>
+						<span class="gradient"></span>
+						<span class="dodge"></span>
+					</div>
+				</div>
+
+
+
+				<div class="header_menu">
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#me">About Me</a></li>
+						<li><a href="#profile">Profile</a></li>
+						<li><a href="#skills">Skills</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</header>
+
+
+
+
+	<section>
+		<div class="content_wrap">
+
+
+			<div class="aboutme" id="me">
+				<h2>
+					<b>01.about me</b>
+				</h2>
+				<img src="img/me_s.png" alt="ME">
+				<div class="job_wrap">
+					<span>SooJi Ryu</span><br>
+					<span class="type_web">Web</span>
+					<span class="type_big">Spring</span>
+					Developer
+				</div>
+			</div>
+
+
+
+
+				
+				
+		</div>
+
+				
+
+
+
+
+
+
+
+
+
+
+			
+			<div class="profile_wrap" id="profile">
+				<div class="profile">
+					<h2><b>02.profile</b></h2>
+				</div>
+
+				
+					
+				<div class="icon_wrap">
+					<div class="icon_group">
+						<div class="icon">
+							<i class="fas fa-envelope"></i>
+							<div class="word_wrap">
+								<div class="shape"></div>
+								<h1>E-mail</h1>
+								rsj6611@gmail.com
+							</div>
+						</div>
+						<div class="icon">
+							<i class="fas fa-map-marker-alt"></i>
+							<div class="word_wrap">
+								<div class="shape"></div>
+								<h1>Address</h1>
+								Gwangju, Korea
+							</div>
+						</div>
+						<div class="icon">
+							<i class="fas fa-mobile-alt"></i>
+							<div class="word_wrap">
+								<div class="shape"></div>
+								<h1>Cellphone</h1>
+								010-5507-9154
+							</div>
+							
+						</div>
+						<div class="icon">
+							<i class="fas fa-graduation-cap"></i>
+							<div class="word_wrap">
+								<div class="shape"></div>
+								<h1>Degree</h1>
+								Bachelor 0f Science
+							</div>
+						</div>
+						<div class="icon">
+							<i class="fas fa-book"></i>
+							<div class="word_wrap">
+								<div class="shape"></div>
+								<h1>Education</h1>
+								Web, Spring
+							</div>
+						</div>
+						<div class="icon icon_resume">
+							<i class="fas fa-download"></i>
+							<div class="word_wrap word_wrap_resume">
+								<div class="shape"></div>
+								<h1>Resume <br></h1>
+								Click on this!
+								<a href="#profile">Download</a>
+
+							</div>
+						</div>
+					</div>					
+				</div>
+			</div>
+					
+
+
+
+
+			<div class="skills_wrap" id="skills">	
+				<div class="skills">
+
+					
+
+					<h2><b id="skills_color">03.technical skills</b></h2>
+					<p>Programming(JAVA)</p>
+					<div class="whitebar">
+						<div class="slatebar" style="width: 50%;">50%</div>
+					</div>
+					<p>Web Design(HTML, CSS)</p>
+					<div class="whitebar">
+						<div class="slatebar" style="width: 60%;">60%</div>
+					</div>
+					<p>Database(Oracle)</p>
+					<div class="whitebar">
+						<div class="slatebar" style="width: 60%;">60%</div>
+					</div>
+					<p>Web Developer(Servlet/JSP, Spring)</p>
+					<div class="whitebar">
+						<div class="slatebar" style="width: 60%;">60%</div>
+					</div>
+					
+					
+				</div>
+			</div>
+					
+
+			
+			<div class="contact_wrap" id="contact">
+				<h2><b>04.contact me</b></h2>
+					
+				<div class="inner_contact">
+					<div class="map" id="map_view" style="width: 100%; height: 370px;"></div>
+					<div class="contact">
+						<p>Do you want my programming skills? <br>
+						Fill out the form and fill me in with the details :) <br>
+						I love meeting new people!</p>
+
+						
+
+							<div class="coninfo_wrap1">
+								<div class="coninfo" id="coninfo_name">
+									<!-- <label>Name</label> -->
+									<input type="text" name="Name"  placeholder="NAME" id="contact_name" class="input_class">
+								</div>
+								<div class="coninfo" id="coninfo_email">
+									<!-- <label>Email</label> -->
+									<input type="text" name="Email"  placeholder="EMAIL" id="contact_email" class="input_class">
+								</div>
+							</div>
+
+							<div class="coninfo">
+								<!-- <label>Message</label> -->
+								<textarea class="box_message" id="text_area" rows="4" cols="50" placeholder="MESSAGE"></textarea>
+
+								<!-- <input type="text" name="Message"  placeholder="MESSAGE"> -->
+							</div>
+
+							<button><i class="fas fa-rocket"></i> Send</button>
+
+						</div>
+
+						
+
+					
+				</div>
+			</div>
+						
+		
+
+	
+		</section>
+
+
+
+
+	<footer>
+		<center>
+			<div class="sfooter">
+				<div class="sns_followme">
+					<h2>Let's work together</h2>
+
+					<div class="sns_wrap">
+						<a href="#" class="sns_btn">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a href="#" class="sns_btn">
+							<i class="fab fa-google"></i>
+						</a>
+						<a href="#" class="sns_btn">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a href="#" class="sns_btn">
+							<i class="fab fa-youtube"></i>
+						</a>
+					</div>
+				</div>
+
+
+			</div>
+			
+		</center>
+	</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		// 스크롤 끝에서 탑으로 올라가는 버튼이 생김
+		$(window).scroll(function(){
+
+			var scrollValue = $(this).scrollTop();
+			if(scrollValue > 40) {
+				$('#topBtn').fadeIn();
+			} else {
+				$('#topBtn').fadeOut();
+
+			}
+		});
+
+		$('#topBtn').click(function(){
+			$('html, body').animate({scrollTop : 0}, 100);
+		});
+
+
+
+		// 이름과 이메일 textarea에 포커스가면 회색창으로 바뀌는 제이쿼리
+
+		$('#contact_name').focus(function(){
+			$(this).css('background-color', '#dadada');
+		});
+		$('#contact_name').blur(function(){
+			$(this).css('background-color', '#fff');
+		});
+
+		$('#contact_email').focus(function(){
+			$(this).css('background-color', '#dadada');
+		});
+		$('#contact_email').blur(function(){
+			$(this).css('background-color', '#fff');
+		});
+
+		$('#text_area').focus(function(){
+			$(this).css('background-color', '#dadada');
+		});
+		$('#text_area').blur(function(){
+			$(this).css('background-color', '#fff');
+		});
+
+
+
+		// profile에서 resume download에서 아이콘 호버했을 때 opacity:0;인 곳으로 커서가 가도 opacity:1;이 되도록 하는 것 
+
+		$('.icon_resume').hover(function(){
+			$('.word_wrap_resume').css('opacity', '1');
+		}, function(){
+			$('.word_wrap_resume').css('opacity', '0');
+		});
+
+
+		
+
+
+
+	});
+
+</script>
+
+
+
+</body>
+</html>
